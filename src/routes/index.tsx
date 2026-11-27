@@ -1,23 +1,16 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+import {createFileRoute,Link} from '@tanstack/react-router';
+import {ArrowRight,ArrowUpRight,BookOpen,HeartHandshake,Globe,ShieldCheck,Sparkles,Users,MessagesSquare,Leaf,CheckCircle2} from 'lucide-react';
+import {Button} from '@/components/ui/button';
+import {CourseCard} from '@/components/edupeace/course-card';
+import {courses,pageHead} from '@/lib/learning';
+import learning from '@/assets/learning.asset.json';
+import peace from '@/assets/peace.asset.json';
+export const Route=createFileRoute('/')({head:()=>pageHead('Education Without Borders','Empowering refugee and host-community learners through inclusive education, digital innovation, and peacebuilding.',learning.url),component:Home});
+function Home(){return <>
+<section className="hero"><img className="hero-image" src={learning.url} alt="Young adults learning and collaborating together in a community classroom"/><div className="hero-wash"/><div className="container hero-content"><span className="eyebrow"><Sparkles size={13}/> A place to learn. A space to belong.</span><h1>Education Without<br/>Borders.<br/><span>Peace Without<br/>Barriers.</span></h1><p className="hero-description">Empowering refugee and host-community learners through inclusive education, digital innovation, and peacebuilding.</p><div className="hero-buttons"><Button asChild><Link to="/auth">Start learning <ArrowUpRight/></Link></Button><Button variant="outline" asChild><Link to="/courses">Explore courses <ArrowRight/></Link></Button></div><Link to="/peace-centre" className="hero-small-link"><HeartHandshake size={15}/> Discover peace education <ArrowRight size={13}/></Link></div><div className="hero-caption"><Users/><div><strong>Different journeys. Shared possibilities.</strong><small>Learning Together, Building Peace Together.</small></div></div></section>
+<section className="values-strip"><div className="container values-inner">{[{icon:BookOpen,text:'Quality education for everyone'},{icon:Globe,text:'Learn in your language'},{icon:HeartHandshake,text:'Stronger communities, together'},{icon:ShieldCheck,text:'Safe, inclusive & accessible'}].map(v=><div className="value" key={v.text}><v.icon/><span>{v.text}</span></div>)}</div></section>
+<section className="container section"><div className="section-header"><div><span className="eyebrow">Your next chapter starts here</span><h2>Small steps. Life-changing skills.</h2><p className="section-subtitle">Explore free courses designed to help you grow, connect, and thrive.</p></div><Button variant="link" asChild><Link to="/courses">View all courses <ArrowRight/></Link></Button></div><div className="course-grid">{courses.map(c=><CourseCard key={c.slug} course={c}/>)}</div></section>
+<section className="peace-band"><div className="container peace-layout"><div><span className="eyebrow"><Leaf size={14}/> Peace & Unity Centre</span><h2>Understanding begins<br/>with learning together.</h2><p>Our differences make us stronger. Discover the skills to listen with empathy, resolve conflicts peacefully, and create a community where everyone belongs.</p><Button asChild variant="unity" className="mt-6"><Link to="/peace-centre">Explore the Peace Centre <ArrowUpRight/></Link></Button></div><div className="peace-visual"><div className="peace-feature"><MessagesSquare/><h3>Dialogue that connects</h3><p>Listen, share, and see the world through another perspective.</p></div><div className="peace-feature"><HeartHandshake/><h3>Everyday acts of peace</h3><p>Turn understanding into meaningful action in your community.</p></div></div></div></section>
+<section className="stats-band"><div className="container"><div className="stats-grid">{[['2,400+','Learners growing together'],['36','Inclusive learning courses'],['85','Dedicated educators'],['24','Community-led projects']].map(([n,t])=><div className="stat" key={t}><strong>{n}</strong><span>{t}</span></div>)}</div><p className="sample-note">An illustration of our vision · All figures above are sample data, not live platform statistics.</p></div></section>
+<section className="container section community-teaser"><img src={peace.url} alt="Community learners connecting through dialogue" loading="lazy"/><div><span className="eyebrow">Together is a powerful place to be</span><h2>More than a classroom.<br/>A community.</h2><p>Share knowledge, find inspiration, and build something meaningful alongside people with different stories and shared dreams.</p><div className="flex items-center gap-2 text-unity text-sm mb-5"><CheckCircle2 size={17}/> Everyone has something to contribute.</div><Button variant="outline" asChild><Link to="/community">Meet your community <ArrowRight/></Link></Button></div></section>
+<section className="join-band"><h2>Your future has no borders.</h2><p>Bring your curiosity. Find your community. Take your first step today.</p><Button asChild><Link to="/auth">Join EduPeace — it’s free <ArrowUpRight/></Link></Button></section></>}

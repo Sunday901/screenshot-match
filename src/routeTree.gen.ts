@@ -10,33 +10,218 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CommunityRouteImport } from './routes/community'
+import { Route as CoursesRouteImport } from './routes/courses'
+import { Route as LibraryRouteImport } from './routes/library'
+import { Route as PeaceCentreRouteImport } from './routes/peace-centre'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as CoursesIndexRouteImport } from './routes/courses.index'
+import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
+import { Route as CoursesSlugIndexRouteImport } from './routes/courses.$slug.index'
+import { Route as CoursesSlugLessonLessonRouteImport } from './routes/courses.$slug.lesson.$lesson'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityRoute = CommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesRoute = CoursesRouteImport.update({
+  id: '/courses',
+  path: '/courses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LibraryRoute = LibraryRouteImport.update({
+  id: '/library',
+  path: '/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PeaceCentreRoute = PeaceCentreRouteImport.update({
+  id: '/peace-centre',
+  path: '/peace-centre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const CoursesIndexRoute = CoursesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CoursesRoute,
+} as any)
+const CoursesSlugRoute = CoursesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CoursesRoute,
+} as any)
+const CoursesSlugIndexRoute = CoursesSlugIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CoursesSlugRoute,
+} as any)
+const CoursesSlugLessonLessonRoute = CoursesSlugLessonLessonRouteImport.update({
+  id: '/lesson/$lesson',
+  path: '/lesson/$lesson',
+  getParentRoute: () => CoursesSlugRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/community': typeof CommunityRoute
+  '/courses': typeof CoursesRouteWithChildren
+  '/library': typeof LibraryRoute
+  '/peace-centre': typeof PeaceCentreRoute
+  '/privacy': typeof PrivacyRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/terms': typeof TermsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/courses/$slug': typeof CoursesSlugRouteWithChildren
+  '/courses/': typeof CoursesIndexRoute
+  '/courses/$slug/': typeof CoursesSlugIndexRoute
+  '/courses/$slug/lesson/$lesson': typeof CoursesSlugLessonLessonRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/community': typeof CommunityRoute
+  '/library': typeof LibraryRoute
+  '/peace-centre': typeof PeaceCentreRoute
+  '/privacy': typeof PrivacyRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/terms': typeof TermsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/courses': typeof CoursesIndexRoute
+  '/courses/$slug': typeof CoursesSlugIndexRoute
+  '/courses/$slug/lesson/$lesson': typeof CoursesSlugLessonLessonRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/community': typeof CommunityRoute
+  '/courses': typeof CoursesRouteWithChildren
+  '/library': typeof LibraryRoute
+  '/peace-centre': typeof PeaceCentreRoute
+  '/privacy': typeof PrivacyRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/terms': typeof TermsRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/courses/$slug': typeof CoursesSlugRouteWithChildren
+  '/courses/': typeof CoursesIndexRoute
+  '/courses/$slug/': typeof CoursesSlugIndexRoute
+  '/courses/$slug/lesson/$lesson': typeof CoursesSlugLessonLessonRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/auth'
+    | '/community'
+    | '/courses'
+    | '/library'
+    | '/peace-centre'
+    | '/privacy'
+    | '/reset-password'
+    | '/terms'
+    | '/dashboard'
+    | '/courses/$slug'
+    | '/courses/'
+    | '/courses/$slug/'
+    | '/courses/$slug/lesson/$lesson'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/auth'
+    | '/community'
+    | '/library'
+    | '/peace-centre'
+    | '/privacy'
+    | '/reset-password'
+    | '/terms'
+    | '/dashboard'
+    | '/courses'
+    | '/courses/$slug'
+    | '/courses/$slug/lesson/$lesson'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/about'
+    | '/auth'
+    | '/community'
+    | '/courses'
+    | '/library'
+    | '/peace-centre'
+    | '/privacy'
+    | '/reset-password'
+    | '/terms'
+    | '/_authenticated/dashboard'
+    | '/courses/$slug'
+    | '/courses/'
+    | '/courses/$slug/'
+    | '/courses/$slug/lesson/$lesson'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
+  CommunityRoute: typeof CommunityRoute
+  CoursesRoute: typeof CoursesRouteWithChildren
+  LibraryRoute: typeof LibraryRoute
+  PeaceCentreRoute: typeof PeaceCentreRoute
+  PrivacyRoute: typeof PrivacyRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  TermsRoute: typeof TermsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +233,164 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community': {
+      id: '/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof CommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses': {
+      id: '/courses'
+      path: '/courses'
+      fullPath: '/courses'
+      preLoaderRoute: typeof CoursesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/library': {
+      id: '/library'
+      path: '/library'
+      fullPath: '/library'
+      preLoaderRoute: typeof LibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/peace-centre': {
+      id: '/peace-centre'
+      path: '/peace-centre'
+      fullPath: '/peace-centre'
+      preLoaderRoute: typeof PeaceCentreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/courses/': {
+      id: '/courses/'
+      path: '/'
+      fullPath: '/courses/'
+      preLoaderRoute: typeof CoursesIndexRouteImport
+      parentRoute: typeof CoursesRoute
+    }
+    '/courses/$slug': {
+      id: '/courses/$slug'
+      path: '/$slug'
+      fullPath: '/courses/$slug'
+      preLoaderRoute: typeof CoursesSlugRouteImport
+      parentRoute: typeof CoursesRoute
+    }
+    '/courses/$slug/': {
+      id: '/courses/$slug/'
+      path: '/'
+      fullPath: '/courses/$slug/'
+      preLoaderRoute: typeof CoursesSlugIndexRouteImport
+      parentRoute: typeof CoursesSlugRoute
+    }
+    '/courses/$slug/lesson/$lesson': {
+      id: '/courses/$slug/lesson/$lesson'
+      path: '/lesson/$lesson'
+      fullPath: '/courses/$slug/lesson/$lesson'
+      preLoaderRoute: typeof CoursesSlugLessonLessonRouteImport
+      parentRoute: typeof CoursesSlugRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+interface CoursesSlugRouteChildren {
+  CoursesSlugIndexRoute: typeof CoursesSlugIndexRoute
+  CoursesSlugLessonLessonRoute: typeof CoursesSlugLessonLessonRoute
+}
+
+const CoursesSlugRouteChildren: CoursesSlugRouteChildren = {
+  CoursesSlugIndexRoute: CoursesSlugIndexRoute,
+  CoursesSlugLessonLessonRoute: CoursesSlugLessonLessonRoute,
+}
+
+const CoursesSlugRouteWithChildren = CoursesSlugRoute._addFileChildren(
+  CoursesSlugRouteChildren,
+)
+
+interface CoursesRouteChildren {
+  CoursesSlugRoute: typeof CoursesSlugRouteWithChildren
+  CoursesIndexRoute: typeof CoursesIndexRoute
+}
+
+const CoursesRouteChildren: CoursesRouteChildren = {
+  CoursesSlugRoute: CoursesSlugRouteWithChildren,
+  CoursesIndexRoute: CoursesIndexRoute,
+}
+
+const CoursesRouteWithChildren =
+  CoursesRoute._addFileChildren(CoursesRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
+  CommunityRoute: CommunityRoute,
+  CoursesRoute: CoursesRouteWithChildren,
+  LibraryRoute: LibraryRoute,
+  PeaceCentreRoute: PeaceCentreRoute,
+  PrivacyRoute: PrivacyRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

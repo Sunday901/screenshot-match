@@ -11,6 +11,12 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { Header, Footer } from "@/components/edupeace/shell";
+import { SessionProvider } from "@/components/edupeace/session";
+import { Toaster } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Sun, Moon } from "lucide-react";
+import { useState } from "react";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -81,16 +87,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "EduPeace — Inclusive Learning" },
+      { name: "description", content: "Learning Together, Building Peace Together. Inclusive education and peacebuilding for every learner." },
+      { name: "author", content: "EduPeace" },
+      { property: "og:title", content: "EduPeace — Inclusive Learning" },
+      { property: "og:description", content: "Learning Together, Building Peace Together. Inclusive education and peacebuilding for every learner." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      
     ],
     links: [
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" },
       {
         rel: "stylesheet",
         href: appCss,
@@ -123,8 +130,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      {/* Required: nested routes render here. Removing <SessionProvider><Header /><main><Outlet /></main><Footer /><ThemeToggle /><Toaster position="bottom-center" /></SessionProvider> breaks all child routes. */}
+      <SessionProvider><Header /><main><Outlet /></main><Footer /><ThemeToggle /><Toaster position="bottom-center" /></SessionProvider>
     </QueryClientProvider>
   );
 }
+
+function ThemeToggle() { const [dark,setDark]=useState(false); return <Button variant="outline" size="icon" className="theme-toggle" title={dark ? "Switch to light appearance" : "Switch to dark appearance"} aria-label={dark ? "Switch to light appearance" : "Switch to dark appearance"} onClick={()=>{setDark(!dark);document.documentElement.classList.toggle("dark",!dark)}}>{dark?<Sun/>:<Moon/>}</Button> }
